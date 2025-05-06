@@ -2,9 +2,6 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#new_game()
 var maximum_spd = 350.0 # initial max_spd
 var partition = 10 # every 10 scores up
 var multiplier
@@ -59,10 +56,8 @@ func _on_mob_timer_timeout() -> void:
 	$HUD.update_score(score)
 	$HUD.update_multiplier(multiplier)
 
-
 func _on_score_timer_timeout() -> void:
 	score+=1
-
 
 func _on_start_timer_timeout() -> void:
 	$ScoreTimer.start()
