@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://csngrervle31o"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_eea47"]
-[ext_resource type="PackedScene" uid="uid://c3mk1des7fecr" path="res://mob.tscn" id="2_af6rv"]
-[ext_resource type="PackedScene" uid="uid://bt7f6uja0ud61" path="res://player.tscn" id="3_cfm5x"]
-[ext_resource type="PackedScene" uid="uid://b3av3ivo1os77" path="res://hud.tscn" id="4_yhv3j"]
-[ext_resource type="AudioStream" uid="uid://dhes3eusphflt" path="res://sound/House In a Forest Loop.ogg" id="5_igs17"]
-[ext_resource type="AudioStream" uid="uid://k3lrta3aco4v" path="res://sound/gameover.wav" id="6_rliul"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_v03aw"]
+[ext_resource type="PackedScene" uid="uid://c3mk1des7fecr" path="res://scenes/mob.tscn" id="2_xpxmh"]
+[ext_resource type="PackedScene" uid="uid://bt7f6uja0ud61" path="res://scenes/player.tscn" id="3_d74d3"]
+[ext_resource type="PackedScene" uid="uid://b3av3ivo1os77" path="res://scenes/hud.tscn" id="4_ohtp1"]
+[ext_resource type="AudioStream" uid="uid://dhes3eusphflt" path="res://sound/House In a Forest Loop.ogg" id="5_wmrp1"]
+[ext_resource type="AudioStream" uid="uid://k3lrta3aco4v" path="res://sound/gameover.wav" id="6_6dphi"]
 
 [sub_resource type="Curve2D" id="Curve2D_2cob3"]
 _data = {
@@ -14,8 +14,8 @@ _data = {
 point_count = 5
 
 [node name="Main" type="Node"]
-script = ExtResource("1_eea47")
-mob_scene = ExtResource("2_af6rv")
+script = ExtResource("1_v03aw")
+mob_scene = ExtResource("2_xpxmh")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -25,7 +25,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.77322, 0.951324, 0.615924, 1)
 
-[node name="Player" parent="." instance=ExtResource("3_cfm5x")]
+[node name="Player" parent="." instance=ExtResource("3_d74d3")]
 position = Vector2(242, 363)
 
 [node name="MobTimer" type="Timer" parent="."]
@@ -46,13 +46,13 @@ curve = SubResource("Curve2D_2cob3")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 
-[node name="HUD" parent="." instance=ExtResource("4_yhv3j")]
+[node name="HUD" parent="." instance=ExtResource("4_ohtp1")]
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_igs17")
+stream = ExtResource("5_wmrp1")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_rliul")
+stream = ExtResource("6_6dphi")
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
