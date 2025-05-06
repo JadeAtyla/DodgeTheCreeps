@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://bt7f6uja0ud61"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_18r1j"]
+[ext_resource type="Texture2D" uid="uid://cqacnbbw00otc" path="res://art/playerGrey_walk1.png" id="1_c7h5h"]
+[ext_resource type="Texture2D" uid="uid://ri6be7yiba8c" path="res://art/playerGrey_walk2.png" id="2_0q37h"]
+[ext_resource type="Texture2D" uid="uid://byph2t1i8tw6f" path="res://art/playerGrey_up1.png" id="2_5kfqj"]
+[ext_resource type="Texture2D" uid="uid://b2avk87a8ymbg" path="res://art/playerGrey_up2.png" id="5_f4l6x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_030wc"]
+atlas = ExtResource("2_5kfqj")
+region = Rect2(0, 0, 108, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usvx4"]
+atlas = ExtResource("1_c7h5h")
+region = Rect2(0, 0, 108, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvmb4"]
+atlas = ExtResource("2_0q37h")
+region = Rect2(0, 0, 107, 127)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6dbk"]
+atlas = ExtResource("5_f4l6x")
+region = Rect2(0, 0, 111, 120)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdp0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_030wc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usvx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvmb4")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_030wc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6dbk")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1a3c7"]
+radius = 50.0
+height = 126.0
+
+[node name="Player" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_18r1j")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cdp0a")
+animation = &"up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_1a3c7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
